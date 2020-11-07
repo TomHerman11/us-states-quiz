@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.App {
+    font-family: 'Poppins', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header > * {
+    /* font-size: large; */
+    margin: 0;
+}

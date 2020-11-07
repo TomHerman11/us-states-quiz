@@ -1,0 +1,20 @@
+.UsMap {
+    display: block;
+    margin: auto;
+    width: 65vw;
+}
+
+.UsMapTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.QuizCurrentState {
+    padding: 3px;
+    border-width: 2px;
+    border-image: linear-gradient(to right, #002C77,#CC0C2F);
+    border-image-slice: 1;
+    border-style: solid;
+}
