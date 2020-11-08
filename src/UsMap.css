@@ -1,11 +1,24 @@
 .UsMapQuiz {
-    width: 60vw;
+    display: flex;
+    width: 95%;
+}
+
+.UsMapTitleStats {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    max-height: 75vh;
+}
+
+.UsaFlagImg {
+    width: 20vw;
 }
 
 .UsMap {
     position: relative;
-    top: -6vmin;
+    width: 100%;
 }
 
 .UsMapTitle {
@@ -17,8 +30,9 @@
 
 .QuizCurrentState {
     padding: 3px;
-    border-width: 2px;
+    border-width: 4px 0 4px 0;
     border-image: linear-gradient(to right, #002C77,#CC0C2F);
     border-image-slice: 1;
     border-style: solid;
+    margin: 0;
 }

@@ -18,11 +18,10 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>US States Quiz</h1>
-        <h2>How quickly can you identify the US states on the map?</h2>
-      </header>
       <UsMap quizOrder={quizOrder} />
+      <a href="https://github.com/TomHerman11/us-states-quiz" target="_blank">
+        https://github.com/TomHerman11/us-states-quiz
+      </a>
     </div>
   );
 }

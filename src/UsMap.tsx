@@ -85,41 +85,48 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
     });
 
     return (
-        <div className="UsMapQuiz">
-            {quizEnded &&
-                <div className="UsMapTitle">
-                    <h1>WELL DONE!</h1>
-                    <h4>Errors: {totalErrors}</h4>
-                    <h4>Time: {getTimeCount(startTime, currTime)}</h4>
+        <div className="UsMapQuiz" style={{ flexDirection: isMobile() ? 'column' : 'row' }}>
+            <div className="UsMapTitleStats">
+                <div>
+                    <h1 style={{ margin: 0 }}>US States Quiz</h1>
+                    <h3 style={{ margin: 0, fontWeight: 'normal' }}>How quickly can you identify the US states on the map?</h3>
                 </div>
-            }
-            <div>
-                {!quizEnded &&
+                {quizEnded &&
                     <div className="UsMapTitle">
-                        <h3 className="QuizCurrentState">{(quizIndex < quiz.length) && quiz[quizIndex].stateName}</h3>
-                        <h4>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</h4>
+                        <h1 className="QuizCurrentState">WELL DONE!</h1>
+                        <p>Errors: {totalErrors}</p>
+                        <p>Time: {getTimeCount(startTime, currTime)}</p>
                     </div>
                 }
-                <ComposableMap className="UsMap" projection="geoAlbersUsa">
-                    <Geographies geography={GEO_URL}>
-                        {({ geographies }) => (
-                            <>
-                                {geographies.map(geo => (
-                                    <UsState
-                                        key={geo?.rsmKey}
-                                        geo={geo}
-                                        currQuizState={((quizIndex < quiz.length) && quiz[quizIndex].stateName) || ''}
-                                        showName={statesPropertiesMap[geo?.properties.name || '']?.showName}
-                                        hintUsed={statesPropertiesMap[geo?.properties.name || '']?.hintUsed}
-                                        handleStateClick={handleStateClick}
-                                    />
-                                ))}
-                            </>
-                        )}
-                    </Geographies>
-                </ComposableMap>
+                <div>
+                    {!quizEnded &&
+                        <div className="UsMapTitle">
+                            <h1 className="QuizCurrentState">{(quizIndex < quiz.length) && quiz[quizIndex].stateName}</h1>
+                            <p>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</p>
+                            <p>Hint: After 3 wrong tries the state will be colored</p>
+                        </div>
+                    }
+                </div>
+                <img src="/usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
             </div>
-            <p>Hints: After 3 wrong tries the state will be colored so you can remember for the next time ;) </p>
+            <ComposableMap className="UsMap" projection="geoAlbersUsa" style={{ top: isMobile() ? '' : '-8vh' }}>
+                <Geographies geography={GEO_URL}>
+                    {({ geographies }) => (
+                        <>
+                            {geographies.map(geo => (
+                                <UsState
+                                    key={geo?.rsmKey}
+                                    geo={geo}
+                                    currQuizState={((quizIndex < quiz.length) && quiz[quizIndex].stateName) || ''}
+                                    showName={statesPropertiesMap[geo?.properties.name || '']?.showName}
+                                    hintUsed={statesPropertiesMap[geo?.properties.name || '']?.hintUsed}
+                                    handleStateClick={handleStateClick}
+                                />
+                            ))}
+                        </>
+                    )}
+                </Geographies>
+            </ComposableMap>
         </div >
     );
 }
@@ -133,3 +140,8 @@ function getTimeCount(start: Date, end: Date): string {
     const minutes = diffMinutes < 10 ? `0${diffMinutes}` : `${diffMinutes}`;
     return `${minutes}:${seconds}`;
 }
+
+function isMobile() {
+    return window.innerHeight > window.innerWidth;
+}
+
