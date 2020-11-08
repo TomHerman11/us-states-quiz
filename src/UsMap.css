@@ -1,7 +1,11 @@
+.UsMapQuiz {
+    width: 60vw;
+    text-align: center;
+}
+
 .UsMap {
-    display: block;
-    margin: auto;
-    width: 60vw;;
+    position: relative;
+    top: -6vmin;
 }
 
 .UsMapTitle {

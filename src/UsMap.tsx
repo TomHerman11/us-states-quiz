@@ -85,7 +85,7 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
     });
 
     return (
-        <div className="UsMap">
+        <div className="UsMapQuiz">
             {quizEnded &&
                 <div className="UsMapTitle">
                     <h1>WELL DONE!</h1>
@@ -100,7 +100,7 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
                         <h4>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</h4>
                     </div>
                 }
-                <ComposableMap projection="geoAlbersUsa">
+                <ComposableMap className="UsMap" projection="geoAlbersUsa">
                     <Geographies geography={GEO_URL}>
                         {({ geographies }) => (
                             <>
@@ -119,6 +119,7 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
                     </Geographies>
                 </ComposableMap>
             </div>
+            <p>Hints: After 3 wrong tries the state will be colored so you can remember for the next time ;) </p>
         </div >
     );
 }
