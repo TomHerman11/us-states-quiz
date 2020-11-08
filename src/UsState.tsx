@@ -12,16 +12,15 @@ import allStatesJson from "./data/allStates.json";
 const allStates: { [key: string]: { id: string, val: string } } = allStatesJson;
 
 const STATE_NAME_SIZE = 10;
-const STATE_NAME_OFFSETS: { [key: string]: number[]; } = {
-    VT: [50, -8],
-    NH: [34, 2],
-    MA: [30, -1],
-    RI: [28, 2],
-    CT: [35, 10],
-    NJ: [34, 1],
-    DE: [33, 0],
-    MD: [47, 10],
-    DC: [49, 21]
+const STATE_NAME_OFFSETS: { [key: string]: any; } = {
+    VT: { xArrow: -50, yArrow: -20, xText: -45, optionsArrow: {} },
+    NH: { xArrow: -25, yArrow: -50, xText: -85, optionsArrow: {} },
+    MA: { xArrow: -20, yArrow: 0, xText: 4, optionsArrow: { stroke: "none" } },
+    RI: { xArrow: -11, yArrow: 30, xText: 4, optionsArrow: {} },
+    CT: { xArrow: 0, yArrow: 40, xText: 4, optionsArrow: {} },
+    NJ: { xArrow: 10, yArrow: 25, xText: 4, optionsArrow: {} },
+    DE: { xArrow: 20, yArrow: 20, xText: 4, optionsArrow: {} },
+    MD: { xArrow: 30, yArrow: 30, xText: 4, optionsArrow: {} }
 };
 
 function UsState({ geo, showName, hintUsed, currQuizState, handleStateClick }:
@@ -34,6 +33,7 @@ function UsState({ geo, showName, hintUsed, currQuizState, handleStateClick }:
     return (
         <>
             <Geography
+                className="Geography"
                 stroke="#FFF"
                 geography={geo}
                 fill={!hintUsed ? "#DDD" : '#FFD700'}
@@ -66,11 +66,11 @@ function UsState({ geo, showName, hintUsed, currQuizState, handleStateClick }:
                             (
                                 <Annotation
                                     subject={centroid}
-                                    dx={STATE_NAME_OFFSETS[currState.id][0]}
-                                    dy={STATE_NAME_OFFSETS[currState.id][1]}
-                                    connectorProps={{}}
+                                    dx={STATE_NAME_OFFSETS[currState.id].xArrow}
+                                    dy={STATE_NAME_OFFSETS[currState.id].yArrow}
+                                    connectorProps={STATE_NAME_OFFSETS[currState.id].optionsArrow}
                                 >
-                                    <text x={4} fontSize={STATE_NAME_SIZE} alignmentBaseline="middle">
+                                    <text x={STATE_NAME_OFFSETS[currState.id].xText} fontSize={STATE_NAME_SIZE} alignmentBaseline="middle">
                                         {geo.properties.name}
                                     </text>
                                 </Annotation>

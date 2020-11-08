@@ -4,3 +4,7 @@ svg text{
     -ms-user-select: none;
     user-select: none;
 }
+
+.Geography {
+    stroke-width: 0.7;
+}

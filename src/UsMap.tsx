@@ -102,8 +102,8 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
                     {!quizEnded &&
                         <div className="UsMapTitle">
                             <h1 className="QuizCurrentState">{(quizIndex < quiz.length) && quiz[quizIndex].stateName}</h1>
-                            <p>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</p>
-                            <p>Hint: After 3 wrong tries the state will be colored</p>
+                            <p style={{ margin: '10px' }}>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</p>
+                            <p style={{ margin: '0px' }}>Hint: After 3 wrong tries the state will be colored</p>
                         </div>
                     }
                 </div>
