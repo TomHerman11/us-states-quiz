@@ -5,6 +5,7 @@ import {
     Annotation
 } from 'react-simple-maps';
 import { geoCentroid } from "d3-geo";
+// import WashingtonDC from './WashingtonDC';
 import './UsState.css'
 
 // import states' abbreviations and indices:
@@ -26,6 +27,11 @@ const STATE_NAME_OFFSETS: { [key: string]: any; } = {
 function UsState({ geo, showName, hintUsed, currQuizState, handleStateClick }:
     { geo: any, showName: boolean, hintUsed: boolean, currQuizState: string, handleStateClick: any }) {
     const stateName = (geo?.properties?.name || '') as string;
+    if (stateName === "District of Columbia") {
+        return (
+            <WashingtonDC geo={geo} />);
+    }
+
     const currState = allStates[stateName];
     if (!currState) { return (<></>); }
 
@@ -82,3 +88,31 @@ function UsState({ geo, showName, hintUsed, currQuizState, handleStateClick }:
 }
 
 export default UsState;
+
+function WashingtonDC({ geo }: { geo: any }) {
+    const centroid = geoCentroid(geo);
+    const offset = { xArrow: 40, yArrow: 50, xText: 1, optionsArrow: {} };
+
+    return (
+        <>
+            <Geography
+                className="Geography"
+                stroke="#FFF"
+                geography={geo}
+                fill='red'
+            />
+            <g>
+                <Annotation
+                    subject={centroid}
+                    dx={offset.xArrow}
+                    dy={offset.yArrow}
+                    connectorProps={offset.optionsArrow}
+                >
+                    <text x={offset.xText} fontSize={10} alignmentBaseline="middle">
+                        {"Washington D.C."}
+                    </text>
+                </Annotation>
+            </g>
+        </>
+    );
+}
