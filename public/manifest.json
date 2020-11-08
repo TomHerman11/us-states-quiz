@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "US States Quiz",
+  "name": "US States Quiz",
   "icons": [
     {
       "src": "favicon.ico",

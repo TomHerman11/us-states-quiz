@@ -4,7 +4,7 @@
 set -e
 
 # build
-npm run build
+env PUBLIC_URL=https://tomherman11.github.io/us-states-quiz yarn build
 
 # navigate into the build output directory
 cd build

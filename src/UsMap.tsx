@@ -107,7 +107,7 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
                         </div>
                     }
                 </div>
-                <img src="/usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
+                <img src="usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
             </div>
             <ComposableMap className="UsMap" projection="geoAlbersUsa" style={{ top: isMobile() ? '' : '-8vh' }}>
                 <Geographies geography={GEO_URL}>
