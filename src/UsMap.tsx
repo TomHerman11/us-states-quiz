@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import {
     ComposableMap,
     Geographies,
 } from 'react-simple-maps';
 import UsState from './UsState';
+import Timer from './Timer';
+import { QuizState, getNewShuffledQuiz } from './Utils';
 import './UsMap.css'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 const TOTAL_ERRORS_UNTIL_HINT = 3;
 
-function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boolean, hintUsed: boolean })[] }) {
-    const [quiz, setQuiz] = useState(quizOrder);
+function UsMap() {
+    const [quiz, setQuiz] = useState<QuizState[]>(getNewShuffledQuiz());
     const [quizIndex, setQuizIndex] = useState(0);
     const [totalErrors, setTotalErrors] = useState(0);
     const [errorsToHint, setErrorsToHint] = useState(TOTAL_ERRORS_UNTIL_HINT);
-
-    //measure time:
-    const [startTime] = useState(new Date());
-    const [currTime, setCurrTime] = useState(new Date());
     const [quizEnded, setQuizEnded] = useState(false);
 
-    useEffect(() => {
-        let interval = setInterval(() => { }, 0);
-        if (!quizEnded) {
-            interval = setInterval(() => setCurrTime(new Date()), 1000);
-        }
-        return () => {
-            clearInterval(interval);
-        };
-    }, [quizEnded]);
+    const restartQuiz = () => {
+        setQuiz(getNewShuffledQuiz());
+        setQuizIndex(0);
+        setTotalErrors(0);
+        setErrorsToHint(TOTAL_ERRORS_UNTIL_HINT);
+        setQuizEnded(false);
+    }
 
     const moveToNextState = (stateName: string, showName: boolean, hintUsed: boolean) => {
         // update the quiz:
@@ -86,30 +82,33 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
 
     return (
         <div className="UsMapQuiz" style={{ flexDirection: isMobile() ? 'column' : 'row' }}>
-            <div className="UsMapTitleStats">
-                <div>
-                    <h1 style={{ margin: 0 }}>US States Quiz</h1>
-                    <h3 style={{ margin: 0, fontWeight: 'normal' }}>How quickly can you identify the US states on the map?</h3>
+            <div className="UsMapStats">
+                <div className="UsMapStatsHeader">
+                    <h1>US States Quiz</h1>
+                    <h3 style={{ fontWeight: 'normal' }}>How quickly can you identify the US states on the map?</h3>
                 </div>
-                {quizEnded &&
-                    <div className="UsMapTitle">
-                        <h1 className="QuizCurrentState">WELL DONE!</h1>
-                        <p>Errors: {totalErrors}</p>
-                        <p>Time: {getTimeCount(startTime, currTime)}</p>
-                    </div>
-                }
-                <div>
-                    {!quizEnded &&
-                        <div className="UsMapTitle">
-                            <h1 className="QuizCurrentState">{(quizIndex < quiz.length) && quiz[quizIndex].stateName}</h1>
-                            <p style={{ margin: '10px' }}>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</p>
-                            <p style={{ margin: '0px', fontSize: 'small' }}>Hint: If you guess the location incorrectly 3 times in a row, the correct state will automatically highlight itself.</p>
+                <div className="UsMapStatsInfo">
+                    {quizEnded &&
+                        <div className="UsMapStatsInfo">
+                            <h1 className="QuizCurrentState">WELL DONE!</h1>
+                            <p style={{ margin: '0px' }}>Mistakes made: {totalErrors}</p>
                         </div>
                     }
+                    {!quizEnded && <div>
+                        <h1 className="QuizCurrentState">{quiz[quizIndex].stateName}</h1>
+                    </div>}
+                    <Timer shouldStopCounting={quizEnded} />
                 </div>
-                <img src="usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
+                <div className="UsMapStatsInfo">
+                    <p style={{ margin: '0px', fontSize: 'small' }}>Hint: If you guess the location incorrectly 3 times in a row, the correct state will automatically highlight itself.</p>
+                    <div className="RestartQuizButton" onClick={() => restartQuiz()}>
+                        Restart Quiz
+                    </div>
+                    <img src="usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
+                </div>
             </div>
-            <ComposableMap className="UsMap" projection="geoAlbersUsa" style={{ top: isMobile() ? '' : '-8vh' }}>
+
+            <ComposableMap className="UsMap" projection="geoAlbersUsa" style={{ top: isMobile() ? '' : '-6vh' }}>
                 <Geographies geography={GEO_URL}>
                     {({ geographies }) => (
                         <>
@@ -132,14 +131,6 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
 }
 
 export default UsMap;
-
-function getTimeCount(start: Date, end: Date): string {
-    const diffSeconds = (Math.floor((end.getTime() - start.getTime()) / 1000)) % 60;
-    const diffMinutes = Math.floor((end.getTime() - start.getTime()) / (1000 * 60));
-    const seconds = diffSeconds < 10 ? `0${diffSeconds}` : `${diffSeconds}`;
-    const minutes = diffMinutes < 10 ? `0${diffMinutes}` : `${diffMinutes}`;
-    return `${minutes}:${seconds}`;
-}
 
 function isMobile() {
     return window.innerHeight > window.innerWidth;

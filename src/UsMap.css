@@ -1,31 +1,41 @@
 .UsMapQuiz {
     display: flex;
-    width: 95%;
+    width: 100%;
 }
 
-.UsMapTitleStats {
+.UsMapStats {
     display: flex;
     flex-direction: column;
     text-align: center;
-    align-items: center;
+    max-height: 85vh;
     justify-content: space-around;
-    max-height: 75vh;
+}
+
+.UsMapStatsHeader > * {
+    margin: 0;
+}
+
+.UsMapStatsInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .UsaFlagImg {
     width: 20vw;
+    /* margin: 5px; */
+}
+
+.RestartQuizButton {
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px black solid;
 }
 
 .UsMap {
     position: relative;
     width: 100%;
-}
-
-.UsMapTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
 }
 
 .QuizCurrentState {
