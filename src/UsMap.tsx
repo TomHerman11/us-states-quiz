@@ -103,7 +103,7 @@ function UsMap({ quizOrder }: { quizOrder: ({ stateName: string, showName: boole
                         <div className="UsMapTitle">
                             <h1 className="QuizCurrentState">{(quizIndex < quiz.length) && quiz[quizIndex].stateName}</h1>
                             <p style={{ margin: '10px' }}>{(quizIndex < quiz.length) && getTimeCount(startTime, currTime)}</p>
-                            <p style={{ margin: '0px' }}>Hint: After 3 wrong tries the state will be colored</p>
+                            <p style={{ margin: '0px', fontSize: 'small' }}>Hint: If you guess the location incorrectly 3 times in a row, the correct state will automatically highlight itself.</p>
                         </div>
                     }
                 </div>
