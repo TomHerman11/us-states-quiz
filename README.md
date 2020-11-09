@@ -3,13 +3,19 @@ How quickly can you identify the US states on the map? 😉🇺🇸 (React, Type
 
 While the whole world was waiting for the 2020 United States presidential election results, I decided to memorize the 50 US States and and their locations on the map. 🤓
 
-
-[react-simple-maps](https://www.react-simple-maps.io/) is a great tool for creating maps.
-
+## Live application
+[https://tomherman11.github.io/us-states-quiz/](https://tomherman11.github.io/us-states-quiz/) 
 
 If the user guesses the location incorrectly 3 times in a row, the correct state will automatically highlight itself. 
-How quickly (and with minimum errors) can you identify the US states on the map?
+
+So, how quickly (and with minimum errors) can you identify the US states on the map?
 
 Good Luck! ✈
 
+
+## Development
+- The app was created with ```create-react-app --template typescript```.
+- [react-simple-maps](https://www.react-simple-maps.io/) is a great tool for creating interactive maps.
+
+## Demo
 ![Demo of 'us-states-quiz' Project](/us-states-quiz.gif)
