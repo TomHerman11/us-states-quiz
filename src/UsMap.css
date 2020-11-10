@@ -13,9 +13,13 @@
     .UsMapQuiz {
         flex-direction: row;
     }
-    
+
     .UsMap {
         top: -6vh;
+    }
+
+    .UsMapStats {
+        max-width: 40vw;
     }
  }
 
@@ -23,8 +27,6 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    max-height: 85vh;
-    justify-content: space-around;
 }
 
 .UsMapStatsHeader > * {
