@@ -122,10 +122,10 @@ function UsMap() {
                 </div>
                 <div className="UsMapStatsInfo">
                     <p style={{ margin: '0px', fontSize: 'small' }}>Hint: If you guess the location incorrectly 3 times in a row, the correct state will automatically highlight itself.</p>
-                    <div className="RestartQuizButton" onClick={() => restartQuiz()}>
+                    <div className="RestartQuizButton Unselectable" onClick={() => restartQuiz()}>
                         Restart Quiz
                     </div>
-                    <img src="usa-flag.svg" alt="usa-flag" className="UsaFlagImg" />
+                    <img src="usa-flag.svg" alt="usa-flag" className="UsaFlagImg Unselectable" />
                 </div>
             </div>
 

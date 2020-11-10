@@ -10,7 +10,9 @@ function App() {
       <a
         href="https://github.com/TomHerman11/us-states-quiz"
         rel="noreferrer"
-        target="_blank">
+        target="_blank"
+        className="Unselectable"
+      >
         https://github.com/TomHerman11/us-states-quiz
       </a>
     </div>
