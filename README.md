@@ -13,6 +13,7 @@ Good Luck! ✈
 ## Development
 - The app was created with ```create-react-app --template typescript```.
 - [react-simple-maps](https://www.react-simple-maps.io/) is a great tool for creating interactive maps.
+- Portrait / Landscape orientation is supported.
 
 ## Demo
 ![Demo of 'us-states-quiz' Project](/us-states-quiz.gif)
