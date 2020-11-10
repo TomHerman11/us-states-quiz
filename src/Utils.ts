@@ -14,3 +14,11 @@ export function getNewShuffledQuiz(): QuizState[] {
         })
     );
 }
+
+export function getTimeCount(start: Date, end: Date): string {
+    const diffSeconds = (Math.floor((end.getTime() - start.getTime()) / 1000)) % 60;
+    const diffMinutes = Math.floor((end.getTime() - start.getTime()) / (1000 * 60));
+    const seconds = diffSeconds < 10 ? `0${diffSeconds}` : `${diffSeconds}`;
+    const minutes = diffMinutes < 10 ? `0${diffMinutes}` : `${diffMinutes}`;
+    return `${minutes}:${seconds}`;
+}

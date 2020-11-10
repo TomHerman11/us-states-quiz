@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import {
     ComposableMap,
     Geographies,
 } from 'react-simple-maps';
 import UsState from './UsState';
-import Timer from './Timer';
-import { QuizState, getNewShuffledQuiz } from './Utils';
+import * as Utils from './Utils'
 import './UsMap.css'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 const TOTAL_ERRORS_UNTIL_HINT = 3;
 
 function UsMap() {
-    const [quiz, setQuiz] = useState<QuizState[]>(getNewShuffledQuiz());
+    const [quiz, setQuiz] = useState<Utils.QuizState[]>(Utils.getNewShuffledQuiz());
     const [quizIndex, setQuizIndex] = useState(0);
     const [totalErrors, setTotalErrors] = useState(0);
     const [errorsToHint, setErrorsToHint] = useState(TOTAL_ERRORS_UNTIL_HINT);
     const [quizEnded, setQuizEnded] = useState(false);
 
+    // timer:
+    const [startTime, setStartTime] = useState(new Date());
+    const [currTime, setCurrTime] = useState(new Date());
+
+    // update timer:
+    useEffect(() => {
+        let interval = setInterval(() => { }, 0);
+        if (!quizEnded) {
+            interval = setInterval(() => setCurrTime(new Date()), 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [quizEnded]);
+
+    // on restart:
     const restartQuiz = () => {
-        setQuiz(getNewShuffledQuiz());
+        setQuiz(Utils.getNewShuffledQuiz());
         setQuizIndex(0);
         setTotalErrors(0);
         setErrorsToHint(TOTAL_ERRORS_UNTIL_HINT);
         setQuizEnded(false);
+
+        // restart timer:
+        setStartTime(new Date());
+        setCurrTime(new Date());
     }
 
     const moveToNextState = (stateName: string, showName: boolean, hintUsed: boolean) => {
@@ -97,7 +118,7 @@ function UsMap() {
                     {!quizEnded && <div>
                         <h1 className="QuizCurrentState">{quiz[quizIndex].stateName}</h1>
                     </div>}
-                    <Timer shouldStopCounting={quizEnded} />
+                    <p style={{ margin: '10px' }}>{Utils.getTimeCount(startTime, currTime)}</p>
                 </div>
                 <div className="UsMapStatsInfo">
                     <p style={{ margin: '0px', fontSize: 'small' }}>Hint: If you guess the location incorrectly 3 times in a row, the correct state will automatically highlight itself.</p>
