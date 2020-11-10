@@ -3,6 +3,22 @@
     width: 100%;
 }
 
+@media screen and (orientation:portrait) {
+    .UsMapQuiz {
+        flex-direction: column;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .UsMapQuiz {
+        flex-direction: row;
+    }
+    
+    .UsMap {
+        top: -6vh;
+    }
+ }
+
 .UsMapStats {
     display: flex;
     flex-direction: column;

@@ -102,7 +102,7 @@ function UsMap() {
     });
 
     return (
-        <div className="UsMapQuiz" style={{ flexDirection: isMobile() ? 'column' : 'row' }}>
+        <div className="UsMapQuiz">
             <div className="UsMapStats">
                 <div className="UsMapStatsHeader">
                     <h1>US States Quiz</h1>
@@ -129,7 +129,7 @@ function UsMap() {
                 </div>
             </div>
 
-            <ComposableMap className="UsMap" projection="geoAlbersUsa" style={{ top: isMobile() ? '' : '-6vh' }}>
+            <ComposableMap className="UsMap" projection="geoAlbersUsa">
                 <Geographies geography={GEO_URL}>
                     {({ geographies }) => (
                         <>
@@ -152,8 +152,3 @@ function UsMap() {
 }
 
 export default UsMap;
-
-function isMobile() {
-    return window.innerHeight > window.innerWidth;
-}
-
