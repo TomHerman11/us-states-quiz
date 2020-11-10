@@ -1,5 +1,5 @@
 # us-states-quiz
-How quickly can you identify the US states on the map? 😉🇺🇸 (React, TypeScript)
+How quickly can you identify the US states on the map? 😉🗺️ (React, TypeScript)
 
 While the whole world was waiting for the 2020 United States presidential election results, I decided to memorize the 50 US States and and their locations on the map. 🤓
 
