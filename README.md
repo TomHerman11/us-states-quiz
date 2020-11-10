@@ -6,12 +6,9 @@ While the whole world was waiting for the 2020 United States presidential electi
 ## Live application
 [https://tomherman11.github.io/us-states-quiz/](https://tomherman11.github.io/us-states-quiz/) 
 
-If the user guesses the location incorrectly 3 times in a row, the correct state will automatically highlight itself. 
-
-So, how quickly (and with minimum errors) can you identify the US states on the map?
+If the user guesses the location incorrectly 3 times in a row, the correct state will automatically highlight itself.
 
 Good Luck! ✈
-
 
 ## Development
 - The app was created with ```create-react-app --template typescript```.
